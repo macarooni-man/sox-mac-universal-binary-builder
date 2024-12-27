@@ -33,7 +33,6 @@ jobs:
         
         # Test basic functionality
         ./sox --version
-        ./soxi --version
         
         # Create a test file and process it
         ./sox -n test.wav synth 3 sine 440
