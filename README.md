@@ -1,6 +1,6 @@
 # SoX macOS Universal Binary Builder
 
-This script builds a self-contained SoX binary for macOS that works on both Intel (x86_64) and Apple Silicon (arm64) processors. The binary includes all necessary libraries statically linked, making it portable and easy to distribute.
+[Sound eXchange (SoX)](https://en.wikipedia.org/wiki/SoX) is command line audio processing tool. This script builds a self-contained SoX binary for macOS that works on both Intel (x86_64) and Apple Silicon (arm64) processors. The binary includes all necessary libraries statically linked, making it portable and easy to distribute.
 
 ## What it builds
 
