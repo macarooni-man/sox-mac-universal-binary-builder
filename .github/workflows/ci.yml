@@ -1,0 +1,47 @@
+name: CI
+
+on: push
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      
+    - name: Build Universal Binary
+      run: ./build.sh
+        
+    - name: Test Binaries
+      run: |
+        # Test if binaries exist and are universal
+        cd sox-build/universal/bin
+        
+        # Check if binaries exist
+        for binary in sox soxi play rec; do
+          if [ ! -f "$binary" ]; then
+            echo "Error: $binary not found"
+            exit 1
+          fi
+          
+          # Check if binary is universal
+          if ! lipo -info "$binary" | grep -q "x86_64" || ! lipo -info "$binary" | grep -q "arm64"; then
+            echo "Error: $binary is not a universal binary"
+            exit 1
+          fi
+        done
+        
+        # Test basic functionality
+        ./sox --version
+        ./soxi --version
+        
+        # Create a test file and process it
+        ./sox -n test.wav synth 3 sine 440
+        ./soxi test.wav
+
+    - name: Upload Binaries
+      uses: actions/upload-artifact@v3
+      with:
+        name: sox-macos-universal
+        path: sox-build/universal/bin/*
+        if-no-files-found: error
