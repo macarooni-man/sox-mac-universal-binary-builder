@@ -72,6 +72,13 @@ platform=$(uname -s)
 
 if [ "$platform" = "Darwin" ]; then
     echo "Building for macOS (Universal Binary)..."
+
+    # Backwards compatibility target
+    export MACOSX_DEPLOYMENT_TARGET=13.0
+    export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
+
+    echo "Using SDKROOT=$SDKROOT"
+    echo "MACOSX_DEPLOYMENT_TARGET=$MACOSX_DEPLOYMENT_TARGET"
     
     # Download dependencies if sox-src doesn't exist
     if [ ! -d "sox-src" ]; then
