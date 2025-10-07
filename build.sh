@@ -4,6 +4,15 @@ set -euxo pipefail
 # Change to script directory
 cd "$(dirname "$(realpath "$0")")"
 
+# Fetch fresh config.sub/config.guess into old Autotools packages
+refresh_gnu_config() {
+  for d in "$@"; do
+    curl -sL -o "$d/config.sub"  https://git.savannah.gnu.org/cgit/config.git/plain/config.sub
+    curl -sL -o "$d/config.guess" https://git.savannah.gnu.org/cgit/config.git/plain/config.guess
+    chmod +x "$d/config.sub" "$d/config.guess"
+  done
+}
+
 # Download dependencies
 download_dependencies() {
     echo "Downloading dependencies..."
@@ -86,6 +95,7 @@ build_arch() {
     # libmad (static)
     echo "Building libmad for $arch..."
     cd sox-src/libmad
+    refresh_gnu_config "."
     make distclean || true
     rm -f config.cache
     CFLAGS="$cflags" LDFLAGS="$ldflags" \
