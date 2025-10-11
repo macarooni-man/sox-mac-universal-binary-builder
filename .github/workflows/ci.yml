@@ -56,7 +56,9 @@ jobs:
       - name: Install build deps
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential autoconf automake libtool pkg-config curl xz-utils libasound2-dev libpulse-dev
+          sudo apt-get install -y build-essential autoconf automake libtool pkg-config curl xz-utils \
+            libasound2-dev libpulse-dev libjack-jackd2-dev pipewire-jack
+
 
       - name: Build Linux (x64)
         run: chmod +x build-linux.sh && ./build-linux.sh
@@ -85,7 +87,8 @@ jobs:
       - name: Install build deps
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential autoconf automake libtool pkg-config curl xz-utils libasound2-dev libpulse-dev
+          sudo apt-get install -y build-essential autoconf automake libtool pkg-config curl xz-utils \
+            libasound2-dev libpulse-dev libjack-jackd2-dev pipewire-jack
 
       - name: Build Linux (arm64)
         run: chmod +x build-linux-arm64.sh && ./build-linux-arm64.sh
