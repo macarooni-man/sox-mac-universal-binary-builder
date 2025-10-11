@@ -72,6 +72,8 @@ build_arch() {
       --prefix="$(pwd)/../$build_dir" \
       --enable-static --disable-shared \
       --with-mad \
+      --with-alsa \
+      --with-pulseaudio \
       --without-lame --without-id3tag \
       --without-magic --without-png \
       --without-twolame \
