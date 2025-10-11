@@ -58,8 +58,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y build-essential autoconf automake libtool pkg-config curl xz-utils
 
-      - name: Build (x64)
-        run: ./build-linux-x64.sh
+      - name: Build Linux (x64)
+        run: chmod +x build-linux.sh && ./build-linux.sh
 
       - name: Test binaries
         working-directory: sox-build/linux-x86_64/bin
@@ -87,8 +87,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y build-essential autoconf automake libtool pkg-config curl xz-utils
 
-      - name: Build (arm64)
-        run: ./build-linux-arm64.sh
+      - name: Build Linux (arm64)
+        run: chmod +x build-linux-arm64.sh && ./build-linux-arm64.sh
 
       - name: Test binaries
         working-directory: sox-build/linux-aarch64/bin

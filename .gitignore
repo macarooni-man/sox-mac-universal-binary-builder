@@ -2,3 +2,4 @@ sox.tar.gz
 libsndfile.tar.xz
 sox-src
 sox-build
+*.DS_Store
